@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Snake.tscn" type="PackedScene" id=1]
+[ext_resource path="res://White.png" type="Texture" id=2]
+[ext_resource path="res://Main.gd" type="Script" id=3]
+[ext_resource path="res://Food.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Main" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Food" parent="." instance=ExtResource( 4 )]
+position = Vector2( 160, 64 )
+
+[node name="Environment" type="Position2D" parent="."]
+
+[node name="Wall-R" type="Node2D" parent="Environment"]
+position = Vector2( 304, 88 )
+scale = Vector2( 1, 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Environment/Wall-R"]
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Environment/Wall-R"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Wall-R/Area2D"]
+shape = SubResource( 1 )
+
+[node name="Wall-L" type="Node2D" parent="Environment"]
+position = Vector2( 16, 88 )
+scale = Vector2( 1, 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Environment/Wall-L"]
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Environment/Wall-L"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Wall-L/Area2D"]
+shape = SubResource( 1 )
+
+[node name="Wall-U" type="Node2D" parent="Environment"]
+position = Vector2( 160, 16 )
+scale = Vector2( 24, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Environment/Wall-U"]
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Environment/Wall-U"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Wall-U/Area2D"]
+shape = SubResource( 1 )
+
+[node name="Wall-D" type="Node2D" parent="Environment"]
+position = Vector2( 160, 160 )
+scale = Vector2( 24, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Environment/Wall-D"]
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Environment/Wall-D"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Wall-D/Area2D"]
+shape = SubResource( 1 )
+
+[node name="Snake" parent="." instance=ExtResource( 1 )]
+position = Vector2( 128, 64 )
+[connection signal="food_eaten" from="Snake" to="." method="_on_Snake_food_eaten"]
+[connection signal="wall_hit" from="Snake" to="." method="_on_Snake_wall_hit"]
