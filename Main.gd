@@ -2,7 +2,7 @@ extends Node2D
 
 onready var player = get_node("Snake")
 onready var food = load("res://Food.tscn")
-test
+
 var curr_food
 
 func _ready():
