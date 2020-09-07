@@ -44,7 +44,6 @@ func move():
 			head.position.x -= 16
 		RIGHT:
 			head.position.x += 16
-	pass
 	
 func _on_Timer_timeout():
 	var p = part.instance()
